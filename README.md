@@ -1,4 +1,3 @@
-![R-CMD-check](https://github.com/mineraltsai/mantelVisual/workflows/R-CMD-check/badge.svg)
 ![CRAN Downloads](https://cranlogs.r-pkg.org/badges/mantelVisual)
 
 Visualization of mantel plot (Science 2015) based on coordinate system.
