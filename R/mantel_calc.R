@@ -5,7 +5,7 @@
                           select_col=list( firm = 2:2,cya= 1:1,
 
                                            pro=3:3)) {
-
+  options(warn = -1)
   cat("\n","\n",'method: "pearson", "spearman" or "kendall"')
   datad<-data.frame()
   mantel.result<-data.frame()

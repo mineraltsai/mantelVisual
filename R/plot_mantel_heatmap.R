@@ -44,8 +44,8 @@
                            rlabels = c("< 0","0 - 0.2", "0.2 - 0.8", ">= 0.8"),
                            size.r=c(0.5,2,5,10),
                            node.label.color=NULL) {
-
-  library(tidyverse)
+  options(warn = -1)
+  suppressMessages(library('tidyverse'))
   if (grid.background) {
     "mantel_data" <- function(data12) {
 

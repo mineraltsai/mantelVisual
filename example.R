@@ -1,7 +1,13 @@
+remotes::install_github("mineraltsai/mantelVisual",force = TRUE)
+suppressMessages(library('MicrobiotaProcess'))
+suppressMessages(library('tidyverse'))
+suppressMessages(library('mantelVisual'))
+warnings('off')
+options(warn = -1)
 library(mantelVisual)
 library(igraph)
-data(edmat)
-data(param)
+data(edmat, package = "mantelVisual")
+data(param, package = "mantelVisual")
 data("data_node")
 
 data_test<-cor_mantel(edmat=edmat,ctmat=param,filter=FALSE,ed.p=0.05,ed.r=0.3,
@@ -19,21 +25,21 @@ data12<-data_test
 plot_mantel_heatmap(data12,
                     add.sig=TRUE,  ###是否添加显著性标志
                     edge.curve.min = -0.2,
-                    edge.curve.max = -0.2, ###线条曲率正负阈值范围
-                    layout = "lower",     ###上三角还是下三角
-                    grid.background = FALSE, ###添加最值网格
+                    edge.curve.max = 0.2, ###线条曲率正负阈值范围
+                    layout = "upper",     ###上三角还是下三角
+                    grid.background = TRUE, ###添加最值网格
                     grid.color = "grey90",  ###grid颜色
                     space.h=1.6,
                     space.v=1.5,
 
                     adjust.diag=TRUE, ###是否调整对角线距离
-                    adjust.diag.para=TRUE, ###是否平行调整对角线距离
+                    adjust.diag.para=FALSE, ###是否平行调整对角线距离
                     adjust.diag.para.dist=1,  ###是否平行调整对角线距离为1
                     adjust.node = c(9),   ###adjust.diag.para=false后，调整对角线节点坐标，默认为横坐标，
                     ###可以是数值也可是向量
                     adjust.diag.dist = c(0.2),  ###调整的距离
-                    diag.node.size = 5,         ###对角线节点大小
-                    diag.node.shape.order = 9,  ###对角线节点形状
+                    diag.node.size = 4,         ###对角线节点大小
+                    diag.node.shape.order = 1,  ###对角线节点形状
                     diag.frame.color = "red",  #对角线边框颜色
                     diag.node.color = "red",
 
@@ -48,7 +54,7 @@ plot_mantel_heatmap(data12,
                     mantel.node.color = "purple",
 
                     heatmap.node.size.ratio=15,
-                    heatmap.shape = 3,    ###热图形状
+                    heatmap.shape = 1,    ###热图形状
                     node.color.postive = "purple", ###热图正负相关颜色
                     node.color.mid = "white",
                     node.color.negative = "darkgreen",

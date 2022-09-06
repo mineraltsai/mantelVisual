@@ -3,7 +3,7 @@
                          permutations=9999,
                          filter=TRUE,ed.p=0.05,ed.r=0.4,
                          mantel_select=list(Spec01 = 1:7)) {
-
+  options(warn = -1)
   occor.r<-WGCNA::corAndPvalue(ctmat,method = 'pearson')$cor
   occor.p<-WGCNA::corAndPvalue(ctmat,method = 'pearson')$p
   diag(occor.r) <- 0

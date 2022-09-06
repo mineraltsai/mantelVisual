@@ -33,8 +33,8 @@
                                     vertex.receiver = seq(1,6),
                                     color.use=colorCustom(50,pal = "gygn")
 ) {
-  library(tidyverse)
-
+  suppressMessages(library('tidyverse'))
+  options(warn = -1)
   corr<-data12$occor.r
   d2<-data12$mantel
   corp<-data12$occor.p
