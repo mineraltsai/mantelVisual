@@ -1,4 +1,4 @@
-![CRAN Downloads](https://github.com/mineraltsai/mantelVisual/graphs/traffic)
+
 
 Visualization of mantel plot (Science 2015) based on coordinate system.
 
