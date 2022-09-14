@@ -1,4 +1,4 @@
-<a href="https://github.com/mineraltsai/mantelVisual"><img src="https://github.com/mineraltsai/mantelVisual/blob/master/science2015.png?raw=true" height="200" align="right" /></a>
+<a href="https://github.com/mineraltsai/mantelVisual"><img src="https://github.com/mineraltsai/mantelVisual/blob/master/science2015.png" height="200" align="right" /></a>
 
 Visualization of mantel plot (Science 2015) based on coordinate system.
 
