@@ -5,6 +5,5 @@
 ##'
 ##' @docType package
 ##' @name mantelVisual
-##' @aliases mantelVisual package-mantelVisual
 NULL
 
