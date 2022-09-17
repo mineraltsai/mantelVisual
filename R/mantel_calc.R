@@ -9,10 +9,10 @@
   cat("\n","\n",'method: "pearson", "spearman" or "kendall"')
   datad<-data.frame()
   mantel.result<-data.frame()
+  spec[spec==0]<-1
   for (k in 1:length(select_col)) {
     select_col1<-select_col[[k]]
     spec.name<-names(select_col)[[k]]
-    spec[,select_col1][which(spec[,select_col1]==0)] <- 1
     veg.dist <- vegan::vegdist(spec[,select_col1]) # Bray-Curtis
 
     for (t in 1:ncol(param)) {
