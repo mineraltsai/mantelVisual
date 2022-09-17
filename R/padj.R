@@ -1,8 +1,8 @@
-"padj"<-function (rawp, proc = c("Bonferroni", "Holm", "Hochberg", "SidakSS", 
-                         "SidakSD", "BH", "BY", "ABH", "TSBH"), 
-          alpha = 0.05, na.rm = FALSE) 
+"padj"<-function (rawp, proc = c("Bonferroni", "Holm", "Hochberg", "SidakSS",
+                         "SidakSD", "BH", "BY", "ABH", "TSBH"),
+          alpha = 0.05, na.rm = FALSE)
 {
-  rawp<-occor.p
+
   m <- length(rawp)
   if (na.rm) {
     mgood <- sum(!is.na(rawp))
@@ -28,15 +28,15 @@
     adjp[, 1] <- spval
     tmp <- spval
     for (i in (m - 1):1) {
-      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i], 
+      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i],
                                     1, na.rm = TRUE), na.rm = TRUE)
-      if (is.na(spval[i])) 
+      if (is.na(spval[i]))
         tmp[i] <- NA
     }
     h0.TSBH <- rep(0, length(alpha))
     names(h0.TSBH) <- paste("h0.TSBH", alpha, sep = "_")
     for (i in 1:length(alpha)) {
-      h0.TSBH[i] <- mgood - sum(tmp < alpha[i]/(1 + alpha[i]), 
+      h0.TSBH[i] <- mgood - sum(tmp < alpha[i]/(1 + alpha[i]),
                                 na.rm = TRUE)
       adjp[, TS.spot + i] <- tmp * h0.TSBH[i]/mgood
     }
@@ -49,35 +49,35 @@
   if (is.element("Holm", proc)) {
     tmp <- spval
     tmp[1] <- min(mgood * spval[1], 1)
-    for (i in 2:m) tmp[i] <- max(tmp[i - 1], min((mgood - 
+    for (i in 2:m) tmp[i] <- max(tmp[i - 1], min((mgood -
                                                     i + 1) * spval[i], 1))
     adjp[, "Holm"] <- tmp
   }
   if (is.element("Hochberg", proc)) {
     tmp <- spval
     for (i in (m - 1):1) {
-      tmp[i] <- min(tmp[i + 1], min((mgood - i + 1) * 
+      tmp[i] <- min(tmp[i + 1], min((mgood - i + 1) *
                                       spval[i], 1, na.rm = TRUE), na.rm = TRUE)
-      if (is.na(spval[i])) 
+      if (is.na(spval[i]))
         tmp[i] <- NA
     }
     adjp[, "Hochberg"] <- tmp
   }
-  if (is.element("SidakSS", proc)) 
+  if (is.element("SidakSS", proc))
     adjp[, "SidakSS"] <- 1 - (1 - spval)^mgood
   if (is.element("SidakSD", proc)) {
     tmp <- spval
     tmp[1] <- 1 - (1 - spval[1])^mgood
-    for (i in 2:m) tmp[i] <- max(tmp[i - 1], 1 - (1 - spval[i])^(mgood - 
+    for (i in 2:m) tmp[i] <- max(tmp[i - 1], 1 - (1 - spval[i])^(mgood -
                                                                    i + 1))
     adjp[, "SidakSD"] <- tmp
   }
   if (is.element("BH", proc)) {
     tmp <- spval
     for (i in (m - 1):1) {
-      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i], 
+      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i],
                                     1, na.rm = TRUE), na.rm = TRUE)
-      if (is.na(spval[i])) 
+      if (is.na(spval[i]))
         tmp[i] <- NA
     }
     adjp[, "BH"] <- tmp
@@ -87,9 +87,9 @@
     a <- sum(1/(1:mgood))
     tmp[m] <- min(a * spval[m], 1)
     for (i in (m - 1):1) {
-      tmp[i] <- min(tmp[i + 1], min((mgood * a/i) * spval[i], 
+      tmp[i] <- min(tmp[i + 1], min((mgood * a/i) * spval[i],
                                     1, na.rm = TRUE), na.rm = TRUE)
-      if (is.na(spval[i])) 
+      if (is.na(spval[i]))
         tmp[i] <- NA
     }
     adjp[, "BY"] <- tmp
@@ -103,9 +103,9 @@
     grab <- min(which(diff(h0.m, na.rm = TRUE) > 0), na.rm = TRUE)
     h0.ABH <- ceiling(min(h0.m[grab], mgood))
     for (i in (m - 1):1) {
-      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i], 
+      tmp[i] <- min(tmp[i + 1], min((mgood/i) * spval[i],
                                     1, na.rm = TRUE), na.rm = TRUE)
-      if (is.na(spval[i])) 
+      if (is.na(spval[i]))
         tmp[i] <- NA
     }
     adjp[, "ABH"] <- tmp * h0.ABH/mgood
